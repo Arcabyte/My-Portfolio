@@ -278,6 +278,10 @@ h2.title{font-size:clamp(2rem,4.6vw,3rem);font-weight:700;letter-spacing:-.035em
 
 footer{text-align:center;color:var(--faint);font-size:.8rem;padding:30px 20px 40px}
 
+.status-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.status-row .status{margin-bottom:0}
+.flag{width:30px;height:auto;border-radius:2px;flex-shrink:0;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
+.status.based{color:var(--text)}
 /* ============ MICRO-ANIMATIONS ============ */
 .progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:80;transform-origin:0 50%;transform:scaleX(0);
   background:linear-gradient(90deg,var(--blue),var(--violet),var(--teal))}
@@ -357,7 +361,7 @@ h2.title .ch{display:inline-block;opacity:0;transform:translateY(.5em) rotate(4d
   <!-- ============ HERO ============ -->
   <section id="home" class="hero">
     <div class="hero-main glass spot reveal">
-      <div class="status"><i></i>Doha, Qatar · Open to connect</div>
+      <div class="status-row"><div class="status"><i></i>Open to connect</div><div class="status based"><svg class="flag" viewBox="0 0 28 11" aria-hidden="true"><rect width="28" height="11" fill="#8A1538"/><polygon fill="#fff" points="0,0 8,0 11,0.611 8,1.222 11,1.833 8,2.444 11,3.056 8,3.667 11,4.278 8,4.889 11,5.500 8,6.111 11,6.722 8,7.333 11,7.944 8,8.556 11,9.167 8,9.778 11,10.389 8,11.000 0,11"/></svg>Based in Doha, Qatar</div></div>
       <h1><span class="split">Hi, I'm Ali.</span><br><span class="grad sweep">Project manager for national government platforms.</span></h1>
       <p class="lead">I manage Qatar's national government-to-government correspondence programme at the Ministry of Communications and Information Technology. Here I share the templates and guides I build along the way, free to use.</p>
       <div class="cta">
@@ -377,7 +381,7 @@ h2.title .ch{display:inline-block;opacity:0;transform:translateY(.5em) rotate(4d
       </div>
       <div class="hero-id glass">
         <div><strong>Ali Al Qahtani</strong><small>Systems &amp; Applications · MCIT</small></div>
-        <span class="status" style="margin:0;padding:5px 10px 5px 8px"><i></i>Doha</span>
+        <span class="status based" style="margin:0;padding:5px 10px 5px 8px"><svg class="flag" viewBox="0 0 28 11" aria-hidden="true"><rect width="28" height="11" fill="#8A1538"/><polygon fill="#fff" points="0,0 8,0 11,0.611 8,1.222 11,1.833 8,2.444 11,3.056 8,3.667 11,4.278 8,4.889 11,5.500 8,6.111 11,6.722 8,7.333 11,7.944 8,8.556 11,9.167 8,9.778 11,10.389 8,11.000 0,11"/></svg>Doha</span>
       </div>
       <div class="stats">
         <div class="stat"><b data-count="2">0</b><span>Years at MCIT</span></div>
