@@ -148,7 +148,7 @@ img{display:block;max-width:100%}
 .i-contact{background:linear-gradient(160deg,#ff8bbd,#ff4f7f)}
 
 /* ============ LAYOUT ============ */
-main{max-width:1080px;margin:0 auto;padding:110px 22px 60px}
+main{max-width:1180px;margin:0 auto;padding:110px 22px 60px}
 section{padding:70px 0;scroll-margin-top:80px}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-bottom:14px}
 .eyebrow::before{content:"";width:18px;height:1px;background:currentColor}
@@ -161,12 +161,13 @@ h2.title{font-size:clamp(2rem,4.6vw,3rem);font-weight:700;letter-spacing:-.035em
 .reveal.in{opacity:1;transform:none;filter:none}
 
 /* ============ HERO ============ */
-.hero{padding-top:40px;display:grid;grid-template-columns:1.25fr .9fr;gap:22px;align-items:stretch}
+.hero{padding-top:20px;display:grid;grid-template-columns:1.3fr .9fr;gap:22px;align-items:stretch;min-height:calc(100vh - 150px);min-height:calc(100svh - 150px)}
+.hero-main{display:flex;flex-direction:column;justify-content:center}
 .hero-main{padding:44px}
 .status{display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;border-radius:999px;font-size:.8rem;color:var(--muted);background:rgba(255,255,255,.06);border:1px solid var(--stroke-soft);margin-bottom:26px}
 .status i{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(63,224,197,.6);animation:pulse 2.4s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(63,224,197,0)}100%{box-shadow:0 0 0 0 rgba(63,224,197,0)}}
-.hero h1{font-size:clamp(2.3rem,5.2vw,3.7rem);line-height:1.02;letter-spacing:-.045em;font-weight:800}
+.hero h1{font-size:clamp(3rem,7vw,5rem);line-height:1.02;letter-spacing:-.045em;font-weight:800}
 .hero p.lead{color:var(--muted);font-size:1.12rem;margin-top:20px;max-width:520px}
 .rotator{display:inline-block;position:relative;height:1.2em;vertical-align:bottom;overflow:hidden}
 .rotator span{display:block;animation:rot 9s var(--ease) infinite}
@@ -283,6 +284,13 @@ h2.title{font-size:clamp(2rem,4.6vw,3rem);font-weight:700;letter-spacing:-.035em
 footer{text-align:center;color:var(--faint);font-size:.8rem;padding:30px 20px 40px}
 
 .status-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.status .sep{width:1px;height:12px;background:var(--stroke);margin:0 4px}
+.hero .role{font-size:clamp(1.35rem,2.6vw,2rem);font-weight:700;letter-spacing:-.025em;line-height:1.2;margin-top:10px;max-width:560px}
+.hero .role.sweep{display:block}
+.li-btn{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex-shrink:0;color:#fff;
+  background:rgba(255,255,255,.1);border:1px solid var(--stroke-soft);transition:background .3s,transform .3s var(--spring)}
+.li-btn:hover{background:#0a66c2;transform:translateY(-2px)}
+.li-btn svg{width:17px;height:17px}
 .status-row .status{margin-bottom:0}
 .flag{width:30px;height:auto;border-radius:2px;flex-shrink:0;box-shadow:0 0 0 1px rgba(255,255,255,.18)}
 .status.based{color:var(--text)}
@@ -292,7 +300,7 @@ footer{text-align:center;color:var(--faint);font-size:.8rem;padding:30px 20px 40
 .hero h1 .w{display:inline-block;opacity:0;transform:translateY(.45em);filter:blur(8px);
   animation:wordIn .9s var(--ease) forwards}
 @keyframes wordIn{to{opacity:1;transform:none;filter:none}}
-.hero h1 .sweep{display:inline;-webkit-mask-image:linear-gradient(90deg,#000 45%,transparent 55%);mask-image:linear-gradient(90deg,#000 45%,transparent 55%);
+.hero .sweep{display:inline;-webkit-mask-image:linear-gradient(90deg,#000 45%,transparent 55%);mask-image:linear-gradient(90deg,#000 45%,transparent 55%);
   -webkit-mask-size:250% 100%;mask-size:250% 100%;-webkit-mask-position:100% 0;mask-position:100% 0;
   animation:sweep 1.6s var(--ease) .55s forwards}
 @keyframes sweep{to{-webkit-mask-position:0 0;mask-position:0 0}}
@@ -310,7 +318,7 @@ h2.title .ch{display:inline-block;opacity:0;transform:translateY(.5em) rotate(4d
 }
 /* ============ RESPONSIVE ============ */
 @media (max-width:900px){
-  .hero{grid-template-columns:1fr}
+  .hero{grid-template-columns:1fr;min-height:0}
   .span-4,.span-2,.span-3{grid-column:span 6}
   .about{grid-template-columns:1fr}
 }
@@ -318,6 +326,8 @@ h2.title .ch{display:inline-block;opacity:0;transform:translateY(.5em) rotate(4d
   main{padding:30px 16px calc(130px + env(safe-area-inset-bottom))}
   section{padding:48px 0}
   .hero{padding-top:10px}
+  .hero-card{order:-1}
+  .hero-photo{min-height:250px}
   .hero-main{padding:30px 24px}
   .card{padding:22px}
   .contact{padding:40px 22px}
@@ -364,14 +374,16 @@ h2.title .ch{display:inline-block;opacity:0;transform:translateY(.5em) rotate(4d
   <!-- ============ HERO ============ -->
   <section id="home" class="hero">
     <div class="hero-main glass spot reveal">
-      <div class="status-row"><div class="status"><i></i>Open to connect</div><div class="status based"><svg class="flag" viewBox="0 0 28 11" aria-hidden="true"><rect width="28" height="11" fill="#8A1538"/><polygon fill="#fff" points="0,0 8,0 11,0.611 8,1.222 11,1.833 8,2.444 11,3.056 8,3.667 11,4.278 8,4.889 11,5.500 8,6.111 11,6.722 8,7.333 11,7.944 8,8.556 11,9.167 8,9.778 11,10.389 8,11.000 0,11"/></svg>Based in Doha, Qatar</div></div>
-      <h1><span class="split">Hi, I'm Ali.</span><br><span class="grad sweep">Project manager for national government platforms.</span></h1>
-      <p class="lead">I manage Qatar's national government-to-government correspondence programme at the Ministry of Communications and Information Technology. Here I share the templates and guides I build along the way, free to use.</p>
+      <div class="status-row"><div class="status based"><svg class="flag" viewBox="0 0 28 11" aria-hidden="true"><rect width="28" height="11" fill="#8A1538"/><polygon fill="#fff" points="0,0 8,0 11,0.611 8,1.222 11,1.833 8,2.444 11,3.056 8,3.667 11,4.278 8,4.889 11,5.500 8,6.111 11,6.722 8,7.333 11,7.944 8,8.556 11,9.167 8,9.778 11,10.389 8,11.000 0,11"/></svg>Doha, Qatar<span class="sep"></span><i></i>Open to connect</div></div>
+      <h1><span class="split">Hi, I'm Ali.</span></h1>
+      <p class="role sweep"><span class="grad">IT Project Manager for national government platforms.</span></p>
+      <p class="lead">I manage Qatar's national government-to-government correspondence programme at the Ministry of Communications and Information Technology, and share the templates and guides I build along the way.</p>
       <div class="cta">
-        <a href="#library" class="btn btn-primary">
+        <a href="#work" class="btn btn-primary">See my work
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#library" class="btn btn-glass">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
           Browse the library</a>
-        <a href="#work" class="btn btn-glass">See my work</a>
       </div>
     </div>
 
@@ -383,10 +395,11 @@ h2.title .ch{display:inline-block;opacity:0;transform:translateY(.5em) rotate(4d
         </div>
       </div>
       <div class="hero-id glass">
-        <div><strong>Ali Al Qahtani</strong><small>Systems &amp; Applications · MCIT</small></div>
+        <div><strong>Ali Al Qahtani</strong><small>IT Project Manager · Ministry of Communications and Information Technology</small></div>
+        <a class="li-btn" href="https://www.linkedin.com/in/ali-qht/" target="_blank" rel="noopener" aria-label="LinkedIn profile"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
       </div>
       <div class="stats">
-        <div class="stat"><b data-count="2">0</b><span>Years at MCIT</span></div>
+        <div class="stat"><b id="yearsAt" data-since="2024-07">0</b><span>Years at MCIT</span></div>
         <div class="stat"><b>1st</b><span>Class Honours</span></div>
         <div class="stat"><b data-count="10">0</b><span>Certifications</span></div>
       </div>
@@ -422,7 +435,8 @@ h2.title .ch{display:inline-block;opacity:0;transform:translateY(.5em) rotate(4d
     <div class="bento">
       <article class="card glass spot span-4 reveal">
         <div class="when">Jul 2024 — Present</div>
-        <h3 style="margin-top:8px">Systems &amp; Applications Programmer</h3>
+        <h3 style="margin-top:8px">IT Project Manager</h3>
+        <div style="color:var(--faint);font-size:.8rem;margin-top:2px">Official title: Systems and Applications Programmer</div>
         <div class="org">Ministry of Communications and Information Technology</div>
         <ul>
           <li>Project manager for Qatar's national government-to-government correspondence programme (Morasalat and Tawasol). I lead entity onboarding across all integration models, hold delivery acceptance authority under the programme's framework agreement, and run service reviews with the implementation partner.</li>
@@ -609,6 +623,15 @@ const io = new IntersectionObserver(entries => entries.forEach(e => {
   if (e.isIntersecting){ const t = e.target; t.classList.add("in"); io.unobserve(t); setTimeout(() => { t.style.transitionDelay = ""; }, 1300); }
 }), { threshold:.12, rootMargin:"0px 0px -40px 0px" });
 document.querySelectorAll(".reveal").forEach((el,i) => { el.style.transitionDelay = (i%3)*80+"ms"; io.observe(el); });
+
+/* Years at MCIT, counted the way LinkedIn does (start month included) */
+(() => {
+  const el = document.getElementById("yearsAt"); const [y,m] = el.dataset.since.split("-").map(Number);
+  const now = new Date(); const months = (now.getFullYear()-y)*12 + (now.getMonth()+1-m) + 1;
+  const target = Math.floor(months/12*10)/10; let v = 0;
+  const tick = () => { v = Math.min(target, +(v+0.1).toFixed(1)); el.textContent = v.toFixed(1); if (v < target) setTimeout(tick, 900/(target*10)); };
+  el.textContent = "0.0"; setTimeout(tick, 700);
+})();
 
 /* Count-up stats */
 document.querySelectorAll("[data-count]").forEach(el => {
