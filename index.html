@@ -120,31 +120,26 @@ img{display:block;max-width:100%}
 @media (max-width:760px){
   .topnav{display:none}
   .dock{
-    display:flex;justify-content:space-around;align-items:center;position:fixed;z-index:60;
-    left:10px;right:10px;bottom:calc(8px + env(safe-area-inset-bottom));
-    max-width:430px;margin:0 auto;height:88px;padding:0 14px;border-radius:34px;
-    background:rgba(255,255,255,.16);
-    backdrop-filter:blur(40px) saturate(190%);-webkit-backdrop-filter:blur(40px) saturate(190%);
-    border:.5px solid rgba(255,255,255,.22);
-    box-shadow:inset 0 .5px 0 rgba(255,255,255,.35),0 10px 40px -10px rgba(0,0,0,.55);
+    display:grid;grid-template-columns:repeat(5,1fr);position:fixed;z-index:60;
+    left:14px;right:14px;bottom:calc(10px + env(safe-area-inset-bottom));
+    max-width:440px;margin:0 auto;height:64px;padding:5px;border-radius:999px;overflow:visible;
+    background:rgba(255,255,255,.07);
+    backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 -1px 0 rgba(255,255,255,.04),0 12px 34px -8px rgba(0,0,0,.6);
   }
-  .dock::before{display:none}
-  .dock a{position:relative;display:block;-webkit-tap-highlight-color:transparent}
-  .dock a .ico{
-    position:relative;width:60px;height:60px;border-radius:14px;display:grid;place-items:center;overflow:hidden;
-    transition:transform .35s var(--spring),filter .2s;
-  }
-  .dock a .ico::after{ /* soft top gloss, like iOS icons */
-    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-    background:linear-gradient(180deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 50%);
-    box-shadow:inset 0 0 0 .5px rgba(255,255,255,.18);
-  }
-  .dock a svg{width:30px;height:30px;color:#fff;filter:drop-shadow(0 1px 1px rgba(0,0,0,.18))}
-  .dock a:active .ico{transform:scale(.88);filter:brightness(.82)}
-  .dock a::after{content:"";position:absolute;bottom:-9px;left:50%;width:4px;height:4px;border-radius:50%;
-    background:rgba(255,255,255,.9);transform:translateX(-50%) scale(0);transition:transform .3s var(--spring)}
-  .dock a.active::after{transform:translateX(-50%) scale(1)}
-  .dock .lbl{display:none}
+  .dock::before{border-radius:999px}
+  .tab-pill{position:absolute;top:5px;bottom:5px;left:5px;width:calc((100% - 10px)/5);border-radius:999px;
+    background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 4px 14px -4px rgba(0,0,0,.4);
+    transform:translateX(calc(var(--i,0)*100%));transition:transform .5s var(--spring)}
+  .dock a{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+    border-radius:999px;color:rgba(255,255,255,.72);font-size:.66rem;font-weight:500;letter-spacing:.01em;
+    -webkit-tap-highlight-color:transparent;transition:color .3s,transform .25s var(--ease)}
+  .dock a svg{width:23px;height:23px;transition:fill .2s}
+  .dock a.active{color:#fff}
+  .dock a.active svg{fill:currentColor}
+  .dock a:active{transform:scale(.92)}
 }
 .i-home{background:linear-gradient(160deg,#6cb4ff,#2f6bff)}
 .i-lib{background:linear-gradient(160deg,#ffcc6b,#ff8a3d)}
@@ -327,10 +322,7 @@ h2.title .ch{display:inline-block;opacity:0;transform:translateY(.5em) rotate(4d
 @media (max-width:420px){
   .interests{grid-template-columns:1fr}
 }
-@media (max-width:360px){
-  .dock{height:80px;padding:0 8px}
-  .dock a .ico{width:54px;height:54px;border-radius:12.5px}
-}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .reveal{opacity:1;transform:none;filter:none}
@@ -535,17 +527,13 @@ h2.title .ch{display:inline-block;opacity:0;transform:translateY(.5em) rotate(4d
 <footer>© <span id="year"></span> Ali Al Qahtani · Doha, Qatar</footer>
 
 <!-- Mobile dock -->
-<nav class="dock glass" id="dock" aria-label="Dock">
-  <a href="#home" data-nav="home" aria-label="Home"><span class="lbl">Home</span><span class="ico i-home">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span></a>
-  <a href="#library" data-nav="library" aria-label="Library"><span class="lbl">Library</span><span class="ico i-lib">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg></span></a>
-  <a href="#work" data-nav="work" aria-label="Work"><span class="lbl">Work</span><span class="ico i-work">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg></span></a>
-  <a href="#about" data-nav="about" aria-label="About"><span class="lbl">About</span><span class="ico i-about">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></span></a>
-  <a href="#contact" data-nav="contact" aria-label="Contact"><span class="lbl">Contact</span><span class="ico i-contact">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span></a>
+<nav class="dock glass" id="dock" aria-label="Sections">
+  <span class="tab-pill" id="tabPill"></span>
+  <a href="#home" data-nav="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.2 12 3.5l8.5 6.7V20a1 1 0 0 1-1 1H15v-6h-6v6H4.5a1 1 0 0 1-1-1z"/></svg>Home</a>
+  <a href="#library" data-nav="library"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>Library</a>
+  <a href="#work" data-nav="work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="19" height="13.5" rx="2.5"/><path d="M16 7V5.5A2.5 2.5 0 0 0 13.5 3h-3A2.5 2.5 0 0 0 8 5.5V7"/></svg>Work</a>
+  <a href="#about" data-nav="about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.6-3.8 3.8-6 7.5-6s6.9 2.2 7.5 6z"/></svg>About</a>
+  <a href="#contact" data-nav="contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.5L3 21l2-5.5A8.4 8.4 0 1 1 21 11.5z"/></svg>Contact</a>
 </nav>
 
 <script>
@@ -631,6 +619,7 @@ const dockLinks = [...document.querySelectorAll(".dock a")];
 function setActive(id){
   topLinks.forEach(a => a.classList.toggle("active", a.dataset.nav===id));
   dockLinks.forEach(a => a.classList.toggle("active", a.dataset.nav===id));
+  const di = dockLinks.findIndex(a => a.dataset.nav===id); if (di > -1) document.getElementById("tabPill").style.setProperty("--i", di);
   const a = topLinks.find(x => x.dataset.nav===id);
   if (a){ pill.style.left = a.offsetLeft+"px"; pill.style.width = a.offsetWidth+"px"; }
 }
@@ -702,11 +691,7 @@ if (!reduce && finePointer) {
   });
 }
 
-/* Dock: show label briefly on tap */
-dockLinks.forEach(a => a.addEventListener("click", () => {
-  a.classList.add("show-lbl"); setTimeout(() => a.classList.remove("show-lbl"), 900);
-  a.classList.remove("jiggle"); void a.offsetWidth; a.classList.add("jiggle");
-}));
+
 
 document.getElementById("year").textContent = new Date().getFullYear();
 </script>
