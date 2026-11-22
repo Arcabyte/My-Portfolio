@@ -7,10 +7,19 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Ali Al Qahtani</title>
-<meta name="description" content="Ali Al Qahtani — templates, guides and work. Computer Science graduate working on national digital platforms in Doha, Qatar.">
+<meta name="description" content="Ali Al Qahtani — project manager for national government platforms in Qatar. Templates, guides and work.">
+<link rel="canonical" href="https://ali-qht.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ali-qht.com/">
 <meta property="og:title" content="Ali Al Qahtani">
-<meta property="og:description" content="Templates, guides and work from Doha, Qatar.">
-<meta property="og:image" content="assets/avatar.webp">
+<meta property="og:description" content="Project manager for national government platforms in Qatar. Templates, guides and work.">
+<meta property="og:image" content="https://ali-qht.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ali Al Qahtani">
+<meta name="twitter:description" content="Project manager for national government platforms in Qatar. Templates, guides and work.">
+<meta name="twitter:image" content="https://ali-qht.com/assets/og-image.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%2307080d'/><text x='50%' y='54%' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,Helvetica,Arial' font-weight='700' font-size='30' fill='white'>AQ</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -161,7 +170,7 @@ h2.title{font-size:clamp(2rem,4.6vw,3rem);font-weight:700;letter-spacing:-.035em
 .status{display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;border-radius:999px;font-size:.8rem;color:var(--muted);background:rgba(255,255,255,.06);border:1px solid var(--stroke-soft);margin-bottom:26px}
 .status i{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(63,224,197,.6);animation:pulse 2.4s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(63,224,197,0)}100%{box-shadow:0 0 0 0 rgba(63,224,197,0)}}
-.hero h1{font-size:clamp(2.6rem,6.4vw,4.6rem);line-height:1.02;letter-spacing:-.045em;font-weight:800}
+.hero h1{font-size:clamp(2.3rem,5.2vw,3.7rem);line-height:1.02;letter-spacing:-.045em;font-weight:800}
 .hero p.lead{color:var(--muted);font-size:1.12rem;margin-top:20px;max-width:520px}
 .rotator{display:inline-block;position:relative;height:1.2em;vertical-align:bottom;overflow:hidden}
 .rotator span{display:block;animation:rot 9s var(--ease) infinite}
@@ -325,8 +334,8 @@ footer{text-align:center;color:var(--faint);font-size:.8rem;padding:30px 20px 40
   <section id="home" class="hero">
     <div class="hero-main glass spot reveal">
       <div class="status"><i></i>Doha, Qatar · Open to connect</div>
-      <h1>Hi, I'm Ali.<br><span class="grad">Making life</span><br><span class="rotator"><span><b class="grad">simpler.</b><b class="grad">clearer.</b><b class="grad">organized.</b><b class="grad">simpler.</b></span></span></h1>
-      <p class="lead">Templates, guides and notes from my work in government technology, personal finance and everything in between. Free to download and use.</p>
+      <h1>Hi, I'm Ali.<br><span class="grad">Project manager for national government platforms.</span></h1>
+      <p class="lead">I manage Qatar's national government-to-government correspondence programme at the Ministry of Communications and Information Technology. Here I share the templates and guides I build along the way, free to use.</p>
       <div class="cta">
         <a href="#library" class="btn btn-primary">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5v14z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
@@ -424,14 +433,13 @@ footer{text-align:center;color:var(--faint);font-size:.8rem;padding:30px 20px 40
         </div>
       </article>
 
-      <article class="card glass spot span-6 proj wide reveal">
-        <div class="shot"><img src="assets/journal.webp" alt="AI-powered journal app sign-in screen" loading="lazy"></div>
-        <div class="body">
+      <article class="card glass spot span-6 reveal" style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
+        <div style="max-width:620px">
           <div class="when">Senior project · 2023 — 2024</div>
           <h3 style="margin-top:6px">AI-Powered Journal App</h3>
-          <p>A full-stack journaling app with AI-driven features, backed by a 20,000-word dissertation on artificial intelligence and user experience.</p>
-          <div class="tags"><span class="chip">MongoDB</span><span class="chip">Express</span><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">AI</span></div>
+          <p style="color:var(--muted);font-size:.9rem;margin-top:6px">A full-stack journaling app with AI-driven features, backed by a 20,000-word dissertation on artificial intelligence and user experience.</p>
         </div>
+        <div class="tags"><span class="chip">MongoDB</span><span class="chip">Express</span><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">AI</span></div>
       </article>
     </div>
   </section>
