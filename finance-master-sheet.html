@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#07080d">
+<title>Personal Finance Master Sheet — Free Excel Template · Ali Al Qahtani</title>
+<meta name="description" content="A free Excel template that tracks your budget, bank accounts, investments, assets, debts and net worth, with a dashboard that turns it all into charts.">
+<link rel="canonical" href="https://ali-qht.com/finance-master-sheet.html">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://ali-qht.com/finance-master-sheet.html">
+<meta property="og:title" content="Personal Finance Master Sheet — Free Excel Template">
+<meta property="og:description" content="Budget, investments, assets, debts and net worth in one file, with a dashboard of charts.">
+<meta property="og:image" content="https://ali-qht.com/assets/templates/finance-dashboard.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='16' fill='%2307080d'/><text x='50%' y='54%' text-anchor='middle' dominant-baseline='middle' font-family='-apple-system,Helvetica,Arial' font-weight='700' font-size='30' fill='white'>AQ</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+  main{max-width:1080px}
+  .bar{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;width:max-content;max-width:calc(100% - 24px)}
+  .bar a{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:999px;font-size:.88rem;font-weight:500;color:var(--muted);transition:color .3s,background .3s}
+  .bar a:hover{color:var(--text);background:rgba(255,255,255,.08)}
+  .bar a.dlbar{background:#fff;color:#0a0b10;font-weight:600}
+  .bar a.dlbar:hover{background:#e9ecf3}
+  .bar svg{width:16px;height:16px}
+  .bar .brand img{width:26px;height:26px;border-radius:50%;object-fit:cover}
+
+  .t-hero{padding:40px 0 30px}
+  .t-hero h1{font-size:clamp(2.3rem,6vw,4rem);font-weight:800;letter-spacing:-.045em;line-height:1.04;margin:6px 0 16px}
+  .t-hero .sub{font-size:1.1rem;max-width:640px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+  .notice{display:flex;gap:14px;align-items:flex-start;padding:16px 18px;border-radius:18px;margin-top:26px;max-width:640px;
+    background:rgba(255,180,90,.08);border:1px solid rgba(255,180,90,.22)}
+  .notice svg{width:20px;height:20px;color:var(--amber);flex-shrink:0;margin-top:2px}
+  .notice b{display:block;font-size:.95rem;margin-bottom:2px}
+  .notice span{color:var(--muted);font-size:.88rem}
+
+  .shots{display:grid;gap:16px}
+  .shot{padding:10px;cursor:zoom-in}
+  .shot img{width:100%;border-radius:18px;background:#000}
+  .shot figcaption{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 8px 4px;font-size:.88rem;color:var(--muted)}
+  .shot figcaption b{color:var(--text);font-weight:600}
+  .shots-2{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;align-items:start}
+
+  .tabs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+  .tabc{padding:18px 18px 16px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid var(--stroke-soft)}
+  .tabc b{display:block;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+  .tabc span{color:var(--muted);font-size:.9rem}
+
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;counter-reset:s}
+  .step{padding:20px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid var(--stroke-soft);counter-increment:s}
+  .step::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;margin-bottom:12px;
+    font-weight:700;font-size:.85rem;color:#0a0b10;background:#fff}
+  .step b{display:block;margin-bottom:4px}
+  .step span{color:var(--muted);font-size:.88rem}
+
+  .rules{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .rule{padding:26px}
+  .rule .ri{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;margin-bottom:16px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 8px 20px -8px rgba(0,0,0,.6)}
+  .rule .ri svg{width:22px;height:22px;color:#fff}
+  .rule h3{font-size:1.12rem;letter-spacing:-.015em;margin-bottom:8px}
+  .rule p{color:var(--muted);font-size:.94rem}
+  .rule p+p{margin-top:10px}
+  .rule.wide{grid-column:span 2}
+  .gold-split{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+  .gold-split div{padding:16px;border-radius:16px;background:rgba(255,204,107,.08);border:1px solid rgba(255,204,107,.2);text-align:center}
+  .gold-split strong{display:block;font-size:2rem;letter-spacing:-.03em;color:#ffd27a}
+  .gold-split span{font-size:.82rem;color:var(--muted)}
+  .disclaimer{margin-top:18px;padding:16px 18px;border-radius:16px;font-size:.84rem;color:var(--faint);
+    background:rgba(255,255,255,.03);border:1px solid var(--stroke-soft)}
+
+  .dl-card{padding:40px;text-align:center;background:linear-gradient(160deg,rgba(90,162,255,.16),rgba(160,123,255,.12) 50%,rgba(63,224,197,.1))}
+  .dl-card h2{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;letter-spacing:-.035em}
+  .dl-card p{color:var(--muted);margin:10px auto 26px;max-width:460px}
+  .dl-card .cta{justify-content:center}
+
+  .lightbox{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:20px;background:rgba(5,6,10,.85);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);cursor:zoom-out}
+  .lightbox.open{display:grid}
+  .lightbox img{max-width:100%;max-height:90vh;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+
+  @media (max-width:900px){.shots-2{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}}
+  @media (max-width:760px){
+    main{padding:90px 16px 50px}
+    .bar .hide-sm{display:none}
+    .rules{grid-template-columns:1fr}.rule.wide{grid-column:auto}
+    .rule{padding:22px}
+    .dl-card{padding:30px 20px}
+    footer{padding-bottom:40px}
+  }
+  @media (max-width:440px){.steps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="bg" aria-hidden="true">
+  <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div>
+</div>
+<div class="grid-lines" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<nav class="bar glass" aria-label="Page">
+  <a href="index.html#library">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+    Library</a>
+  <a href="index.html" class="brand hide-sm"><img src="assets/avatar.webp" alt="">Ali Al Qahtani</a>
+  <a href="files/Personal-Finance-Master-Sheet-Template.xlsx" download class="dlbar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg>
+    Download</a>
+</nav>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="t-hero">
+    <div class="reveal">
+      <div class="eyebrow">Free template · Excel</div>
+      <h1>Personal Finance <span class="grad">Master Sheet</span></h1>
+      <p class="sub">One file that tracks your monthly budget, bank accounts, investments, assets, debts and net worth over time. The dashboard turns it all into charts.</p>
+      <div class="meta-row">
+        <span class="chip">11 tabs</span>
+        <span class="chip">Excel (.xlsx) · 190 KB</span>
+        <span class="chip">Sample data included</span>
+        <span class="chip">Live prices with Microsoft 365</span>
+      </div>
+      <div class="cta" style="margin-top:26px">
+        <a class="btn btn-primary" href="files/Personal-Finance-Master-Sheet-Template.xlsx" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg>
+          Download the template</a>
+        <a class="btn btn-glass" href="#how-i-invest">How I invest</a>
+      </div>
+      <div class="notice">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>
+        <div><b>This isn't the latest version.</b><span>I keep improving the spreadsheet I use myself, and this template will be updated as it changes. Check back for new versions.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCREENSHOTS ============ -->
+  <section style="padding-top:20px">
+    <div class="shots">
+      <figure class="shot glass reveal">
+        <img src="assets/templates/finance-dashboard.webp" alt="Dashboard tab with cash flow, net worth over time, budget, net worth, brokerage, digital assets and a $1M goal chart" loading="lazy">
+        <figcaption><b>Dashboard</b><span>Every tab, summed up in charts</span></figcaption>
+      </figure>
+      <div class="shots-2">
+        <figure class="shot glass reveal">
+          <img src="assets/templates/finance-budget.webp" alt="Budget tab with monthly budget, spending by category, accounts and emergency fund" loading="lazy">
+          <figcaption><b>Budget</b><span>Needs, wants, investing and your emergency fund</span></figcaption>
+        </figure>
+        <figure class="shot glass reveal">
+          <img src="assets/templates/finance-rebalancing.webp" alt="Rebalancing calculator showing target and current weights for each bucket and how much to buy" loading="lazy">
+          <figcaption><b>Rebalancing calculator</b><span>Tells you what to buy each month</span></figcaption>
+        </figure>
+      </div>
+    </div>
+    <p style="color:var(--faint);font-size:.82rem;margin-top:12px">All numbers in the screenshots and the file are made up for illustration.</p>
+  </section>
+
+  <!-- ============ WHAT'S INSIDE ============ -->
+  <section>
+    <div class="reveal" style="margin-bottom:24px">
+      <div class="eyebrow">What's inside</div>
+      <h2 class="title">Tab by tab</h2>
+      <p class="sub">You only type into the input cells. Totals, percentages, currency conversions and charts are formulas that update by themselves.</p>
+    </div>
+    <div class="tabs-grid reveal">
+      <div class="tabc"><b>How to use</b><span>Start here: what the file does and how to fill it in.</span></div>
+      <div class="tabc"><b>Dashboard</b><span>Charts only. Nothing to type.</span></div>
+      <div class="tabc"><b>Budget</b><span>Salary and every monthly outflow, sorted into Needs, Wants, Invest and Venture. Plus bank accounts and emergency fund months.</span></div>
+      <div class="tabc"><b>Net worth</b><span>One row per month, so you can watch your net worth grow and see a projected date for your first $1M.</span></div>
+      <div class="tabc"><b>Brokerage</b><span>Your holdings with live prices, grouped into buckets, and a rebalancing calculator.</span></div>
+      <div class="tabc"><b>Digital assets</b><span>Crypto holdings with live prices and a log of every purchase.</span></div>
+      <div class="tabc"><b>Real estate</b><span>Any property you own. Equity flows into your net worth.</span></div>
+      <div class="tabc"><b>Business assets</b><span>Your share of any business you own.</span></div>
+      <div class="tabc"><b>Personal assets</b><span>Things with resale value, like a car or a watch.</span></div>
+      <div class="tabc"><b>Retirement</b><span>Pension contributions from your payslip.</span></div>
+      <div class="tabc"><b>Liabilities</b><span>Loans and card balances, subtracted from your net worth.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ MONTHLY ROUTINE ============ -->
+  <section>
+    <div class="reveal" style="margin-bottom:24px">
+      <div class="eyebrow">Monthly routine</div>
+      <h2 class="title">Ten minutes a month</h2>
+    </div>
+    <div class="steps reveal">
+      <div class="step"><b>Banks</b><span>Update each balance in Budget → Accounts.</span></div>
+      <div class="step"><b>Investments</b><span>Update share counts and log the month's deposit.</span></div>
+      <div class="step"><b>Snapshot</b><span>In Net worth, add the new month and paste the Present row as values.</span></div>
+      <div class="step"><b>Review</b><span>Open the Dashboard and check the trend.</span></div>
+    </div>
+    <p style="color:var(--faint);font-size:.84rem;margin-top:14px">Live stock and crypto prices use Excel's Stocks data type, which needs Microsoft 365. The Solana price feed only works in Excel for Windows.</p>
+  </section>
+
+  <!-- ============ HOW I INVEST ============ -->
+  <section id="how-i-invest">
+    <div class="reveal" style="margin-bottom:24px">
+      <div class="eyebrow">My approach</div>
+      <h2 class="title">How I invest</h2>
+      <p class="sub">The template is built around how I manage my own money. Here's the thinking behind it.</p>
+    </div>
+
+    <div class="rules">
+      <article class="rule card glass spot wide reveal">
+        <div class="ri i-about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></div>
+        <h3>Consistency beats the perfect strategy</h3>
+        <p>Investing the same amount every month, whatever the price, matters more than finding the perfect portfolio. This is called dollar-cost averaging, and the Brokerage tab is built around it. A simple plan you stick to for years will do more for you than a clever one you abandon.</p>
+      </article>
+
+      <article class="rule card glass spot reveal">
+        <div class="ri i-work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <h3>Never sell</h3>
+        <p>I buy and hold for the long term. Selling in a panic locks in losses, and trying to time the market usually means missing its best days.</p>
+      </article>
+
+      <article class="rule card glass spot reveal">
+        <div class="ri i-home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
+        <h3>A falling market is an opportunity</h3>
+        <p>When the market or the S&amp;P 500 goes down, I see it as a chance to buy more at lower prices. I believe the market goes up in the long run, and the S&amp;P 500 is designed that way: weaker companies drop out of the index and stronger ones replace them.</p>
+        <p>Historically, the S&amp;P 500 has recovered from every crash and gone on to new highs, although some recoveries have taken years.</p>
+      </article>
+
+      <article class="rule card glass spot reveal">
+        <div class="ri i-lib"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M12 21 8 9l4-6 4 6-4 12"/></svg></div>
+        <h3>I recommend holding gold</h3>
+        <p>Gold tends to hold its value when stocks are struggling, so it balances out a stock-heavy portfolio.</p>
+        <div class="gold-split">
+          <div><strong>10%</strong><span>if you're under 30</span></div>
+          <div><strong>20%</strong><span>if you're over 40</span></div>
+        </div>
+      </article>
+
+      <article class="rule card glass spot reveal">
+        <div class="ri i-contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+        <h3>US and Ireland-domiciled funds</h3>
+        <p>I hold both US-domiciled funds (like VOO) and Ireland-domiciled UCITS funds (like SPYL) for tax reasons. For many investors outside the US, Ireland-domiciled funds mean less tax taken from dividends and no exposure to US estate tax. Check what applies in your country.</p>
+      </article>
+
+      <article class="rule card glass spot wide reveal">
+        <div class="ri i-about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+        <h3>You don't have to copy what I do</h3>
+        <p>This is what works for me, at my age and in my situation. Use the template however suits you: change the buckets, the targets and the categories. The best plan is the one you'll actually stick with.</p>
+      </article>
+    </div>
+
+    <div class="disclaimer reveal">This is my personal approach, not financial advice. I'm not a licensed financial advisor. Investing involves risk, including losing money, and past performance doesn't guarantee future results. Do your own research or speak to a professional before making investment decisions.</div>
+  </section>
+
+  <!-- ============ DOWNLOAD ============ -->
+  <section>
+    <div class="dl-card glass spot reveal">
+      <div class="eyebrow" style="justify-content:center">Free download</div>
+      <h2>Get the <span class="grad">template</span></h2>
+      <p>Open it in Excel, read the How to use tab, then replace the sample numbers with your own.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="files/Personal-Finance-Master-Sheet-Template.xlsx" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg>
+          Download (.xlsx)</a>
+        <a class="btn btn-glass" href="mailto:ali.qahtani@proton.me?subject=Personal%20Finance%20Master%20Sheet">Questions? Email me</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© <span id="year"></span> Ali Al Qahtani · <a href="index.html" style="text-decoration:underline">ali-qht.com</a></footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Screenshot"><img alt=""></div>
+
+<script>
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting){ const t = e.target; t.classList.add("in"); io.unobserve(t); setTimeout(() => t.style.transitionDelay = "", 1300); }
+}), { threshold:.1, rootMargin:"0px 0px -40px 0px" });
+document.querySelectorAll(".reveal").forEach((el,i) => { el.style.transitionDelay = (i%3)*80+"ms"; io.observe(el); });
+
+document.querySelectorAll("h2.title").forEach(h => {
+  let i = 0; const label = h.textContent;
+  h.innerHTML = label.split(" ").map(w => `<span class="wd">${[...w].map(c => `<span class="ch" style="transition-delay:${(i++)*22}ms">${c}</span>`).join("")}</span>`).join(" ");
+  h.setAttribute("aria-label", label);
+});
+
+const prog = document.getElementById("progress");
+const setProg = () => { const m = document.documentElement.scrollHeight - innerHeight; prog.style.transform = `scaleX(${m>0 ? scrollY/m : 0})`; };
+addEventListener("scroll", setProg, { passive:true }); setProg();
+
+document.addEventListener("pointermove", e => {
+  const c = e.target.closest(".spot"); if (!c) return;
+  const r = c.getBoundingClientRect();
+  c.style.setProperty("--mx", (e.clientX-r.left)+"px"); c.style.setProperty("--my", (e.clientY-r.top)+"px");
+});
+
+if (!reduce && matchMedia("(hover: hover) and (pointer: fine)").matches) {
+  document.querySelectorAll(".btn").forEach(b => {
+    b.classList.add("mag");
+    b.addEventListener("pointermove", e => { const r = b.getBoundingClientRect();
+      b.style.transform = `translate(${(e.clientX-r.left-r.width/2)*.18}px, ${(e.clientY-r.top-r.height/2)*.28}px)`; });
+    b.addEventListener("pointerleave", () => b.style.transform = "");
+  });
+}
+
+const lb = document.getElementById("lightbox"), lbImg = lb.querySelector("img");
+document.querySelectorAll(".shot").forEach(f => f.addEventListener("click", () => {
+  const img = f.querySelector("img"); lbImg.src = img.src; lbImg.alt = img.alt; lb.classList.add("open");
+}));
+lb.addEventListener("click", () => lb.classList.remove("open"));
+addEventListener("keydown", e => { if (e.key === "Escape") lb.classList.remove("open"); });
+
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
