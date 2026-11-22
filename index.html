@@ -278,6 +278,28 @@ h2.title{font-size:clamp(2rem,4.6vw,3rem);font-weight:700;letter-spacing:-.035em
 
 footer{text-align:center;color:var(--faint);font-size:.8rem;padding:30px 20px 40px}
 
+/* ============ MICRO-ANIMATIONS ============ */
+.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:80;transform-origin:0 50%;transform:scaleX(0);
+  background:linear-gradient(90deg,var(--blue),var(--violet),var(--teal))}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(.45em);filter:blur(8px);
+  animation:wordIn .9s var(--ease) forwards}
+@keyframes wordIn{to{opacity:1;transform:none;filter:none}}
+.hero h1 .sweep{display:inline;-webkit-mask-image:linear-gradient(90deg,#000 45%,transparent 55%);mask-image:linear-gradient(90deg,#000 45%,transparent 55%);
+  -webkit-mask-size:250% 100%;mask-size:250% 100%;-webkit-mask-position:100% 0;mask-position:100% 0;
+  animation:sweep 1.6s var(--ease) .55s forwards}
+@keyframes sweep{to{-webkit-mask-position:0 0;mask-position:0 0}}
+h2.title .wd{display:inline-block;white-space:nowrap}
+h2.title .ch{display:inline-block;opacity:0;transform:translateY(.5em) rotate(4deg);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.in h2.title .ch{opacity:1;transform:none}
+.tilt{transition:transform .5s var(--ease),border-color .3s}
+.tilt.tilting{transition:transform .12s linear,border-color .3s}
+.btn.mag{transition:transform .25s var(--ease),background .3s,box-shadow .3s}
+@keyframes jiggle{0%{transform:rotate(0)}20%{transform:rotate(-9deg) scale(.92)}45%{transform:rotate(7deg)}65%{transform:rotate(-4deg)}85%{transform:rotate(2deg)}100%{transform:none}}
+.dock a.jiggle .ico{animation:jiggle .55s var(--ease)}
+.status i{will-change:box-shadow}
+@media (prefers-reduced-motion:reduce){
+  .hero h1 .w,.hero h1 .sweep,h2.title .ch{opacity:1!important;transform:none!important;filter:none!important;-webkit-mask-image:none!important;mask-image:none!important}
+}
 /* ============ RESPONSIVE ============ */
 @media (max-width:900px){
   .hero{grid-template-columns:1fr}
@@ -310,6 +332,8 @@ footer{text-align:center;color:var(--faint);font-size:.8rem;padding:30px 20px 40
 </head>
 <body>
 
+<div class="progress" id="progress" aria-hidden="true"></div>
+
 <!-- Animated background -->
 <div class="bg" aria-hidden="true">
   <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div>
@@ -334,7 +358,7 @@ footer{text-align:center;color:var(--faint);font-size:.8rem;padding:30px 20px 40
   <section id="home" class="hero">
     <div class="hero-main glass spot reveal">
       <div class="status"><i></i>Doha, Qatar · Open to connect</div>
-      <h1>Hi, I'm Ali.<br><span class="grad">Project manager for national government platforms.</span></h1>
+      <h1><span class="split">Hi, I'm Ali.</span><br><span class="grad sweep">Project manager for national government platforms.</span></h1>
       <p class="lead">I manage Qatar's national government-to-government correspondence programme at the Ministry of Communications and Information Technology. Here I share the templates and guides I build along the way, free to use.</p>
       <div class="cta">
         <a href="#library" class="btn btn-primary">
@@ -574,7 +598,7 @@ segBtns.forEach(b => b.addEventListener("click", () => {
 
 /* Reveal on scroll */
 const io = new IntersectionObserver(entries => entries.forEach(e => {
-  if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
+  if (e.isIntersecting){ const t = e.target; t.classList.add("in"); io.unobserve(t); setTimeout(() => { t.style.transitionDelay = ""; }, 1300); }
 }), { threshold:.12, rootMargin:"0px 0px -40px 0px" });
 document.querySelectorAll(".reveal").forEach((el,i) => { el.style.transitionDelay = (i%3)*80+"ms"; io.observe(el); });
 
@@ -616,9 +640,65 @@ window.addEventListener("resize", () => { spy(); placeKnob(seg.querySelector(".o
 window.addEventListener("load", () => { spy(); placeKnob(seg.querySelector(".on")); });
 document.fonts && document.fonts.ready.then(() => { spy(); placeKnob(seg.querySelector(".on")); });
 
+
+/* ============ MICRO-ANIMATIONS ============ */
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+/* Headline: words rise in one by one */
+document.querySelectorAll(".hero h1 .split").forEach(el => {
+  el.innerHTML = el.textContent.split(" ").map((w,i) => `<span class="w" style="animation-delay:${120+i*110}ms">${w}</span>`).join(" ");
+});
+
+/* Section titles: letters cascade in when scrolled into view */
+document.querySelectorAll("h2.title").forEach(h => {
+  let i = 0;
+  h.innerHTML = h.textContent.split(" ").map(word =>
+    `<span class="wd">${[...word].map(c => `<span class="ch" style="transition-delay:${(i++)*22}ms">${c}</span>`).join("")}</span>`
+  ).join(" ");
+  h.setAttribute("aria-label", h.textContent);
+});
+
+/* Scroll progress line */
+const prog = document.getElementById("progress");
+const setProg = () => {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  prog.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+};
+addEventListener("scroll", setProg, { passive:true }); setProg();
+
+if (!reduce && finePointer) {
+  /* 3D tilt toward the cursor */
+  document.querySelectorAll(".card.glass, .item, .hero-main, .hero-card").forEach(el => {
+    el.classList.add("tilt");
+    const lift = el.classList.contains("item") ? " translateY(-6px)" : "";
+    el.addEventListener("pointermove", e => {
+      if (!el.classList.contains("in")) return;
+      const r = el.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      const max = r.width > 600 ? 2.5 : 5;
+      el.classList.add("tilting");
+      el.style.transform = `perspective(1000px) rotateX(${(-y*max).toFixed(2)}deg) rotateY(${(x*max).toFixed(2)}deg)${lift}`;
+    });
+    el.addEventListener("pointerleave", () => { el.classList.remove("tilting"); el.style.transform = ""; });
+  });
+
+  /* Magnetic buttons */
+  document.querySelectorAll(".btn, .dl").forEach(b => {
+    b.classList.add("mag");
+    b.addEventListener("pointermove", e => {
+      const r = b.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width/2, y = e.clientY - r.top - r.height/2;
+      b.style.transform = `translate(${x*.18}px, ${y*.28}px)`;
+    });
+    b.addEventListener("pointerleave", () => { b.style.transform = ""; });
+  });
+}
+
 /* Dock: show label briefly on tap */
 dockLinks.forEach(a => a.addEventListener("click", () => {
   a.classList.add("show-lbl"); setTimeout(() => a.classList.remove("show-lbl"), 900);
+  a.classList.remove("jiggle"); void a.offsetWidth; a.classList.add("jiggle");
 }));
 
 document.getElementById("year").textContent = new Date().getFullYear();
