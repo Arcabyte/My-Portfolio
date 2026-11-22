@@ -183,11 +183,17 @@ h2.title{font-size:clamp(2rem,4.6vw,3rem);font-weight:700;letter-spacing:-.035em
 
 .hero-card{display:flex;flex-direction:column}
 .hero-photo{position:relative;flex:1;min-height:300px;overflow:hidden;display:grid;place-items:center}
-.halo{position:absolute;left:50%;top:44%;width:320px;height:320px;transform:translate(-50%,-50%);border-radius:50%;
-  background:radial-gradient(circle,rgba(140,170,255,.22) 0%,rgba(140,170,255,0) 65%);animation:breathe 8s ease-in-out infinite}
-@keyframes breathe{0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(.92)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}}
-.portrait{position:relative;z-index:1;width:156px;height:156px;margin-top:-30px}
-.portrait img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,.25);
+.scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 62%;
+  transform-origin:50% 60%;animation:drift 40s ease-in-out infinite alternate}
+@keyframes drift{0%{transform:scale(1.06) translate3d(0,0,0)}100%{transform:scale(1.16) translate3d(-2.5%,-1.5%,0)}}
+.hero-photo::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(7,8,13,.05) 0%,rgba(7,8,13,0) 45%,rgba(7,8,13,.55) 85%,rgba(7,8,13,.75) 100%)}
+.hero-photo::before{content:"";position:absolute;inset:-20%;z-index:1;pointer-events:none;mix-blend-mode:soft-light;
+  background:linear-gradient(110deg,transparent 40%,rgba(255,255,255,.35) 50%,transparent 60%);
+  animation:shimmer 14s ease-in-out infinite}
+@keyframes shimmer{0%,70%{transform:translateX(-60%)}100%{transform:translateX(60%)}}
+.portrait{position:relative;z-index:2;width:150px;height:150px;align-self:start;margin-top:clamp(26px,6vw,64px)}
+.portrait img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.85);
   box-shadow:0 0 0 8px rgba(255,255,255,.04),0 24px 50px -16px rgba(0,0,0,.7)}
 .hero-id{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 20px;margin:-56px 16px 16px;border-radius:20px}
 .hero-id strong{display:block;font-size:1rem}
@@ -369,14 +375,13 @@ h2.title .ch{display:inline-block;opacity:0;transform:translateY(.5em) rotate(4d
 
     <div class="hero-card glass reveal">
       <div class="hero-photo">
-        <div class="halo"></div>
+        <img class="scene" src="assets/harbor.webp" alt="Illustration of dhows in Doha harbour with the city skyline">
         <div class="portrait">
           <img src="assets/avatar.webp" alt="Ali Al Qahtani">
         </div>
       </div>
       <div class="hero-id glass">
         <div><strong>Ali Al Qahtani</strong><small>Systems &amp; Applications · MCIT</small></div>
-        <span class="status based" style="margin:0;padding:5px 10px 5px 8px"><svg class="flag" viewBox="0 0 28 11" aria-hidden="true"><rect width="28" height="11" fill="#8A1538"/><polygon fill="#fff" points="0,0 8,0 11,0.611 8,1.222 11,1.833 8,2.444 11,3.056 8,3.667 11,4.278 8,4.889 11,5.500 8,6.111 11,6.722 8,7.333 11,7.944 8,8.556 11,9.167 8,9.778 11,10.389 8,11.000 0,11"/></svg>Doha</span>
       </div>
       <div class="stats">
         <div class="stat"><b data-count="2">0</b><span>Years at MCIT</span></div>
