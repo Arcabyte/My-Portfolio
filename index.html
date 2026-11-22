@@ -177,12 +177,31 @@ h2.title{font-size:clamp(2rem,4.6vw,3rem);font-weight:700;letter-spacing:-.035em
 .btn svg{width:17px;height:17px}
 
 .hero-card{display:flex;flex-direction:column}
-.hero-photo{position:relative;flex:1;min-height:260px;overflow:hidden}
-.hero-photo img.city{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);animation:kenburns 24s ease-in-out infinite alternate}
-@keyframes kenburns{to{transform:scale(1.22) translate(-3%,-2%)}}
-.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,8,13,0) 35%,rgba(7,8,13,.85) 100%)}
-.hero-id{position:relative;z-index:2;display:flex;align-items:center;gap:14px;padding:18px 20px;margin:-74px 16px 16px;border-radius:20px}
-.hero-id img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.4)}
+.hero-photo{position:relative;flex:1;min-height:300px;overflow:hidden;display:grid;place-items:center}
+.aurora{position:absolute;inset:-40%;
+  background:conic-gradient(from 0deg,#2f6bff,#a07bff,#ff6fa8,#ffb45a,#3fe0c5,#2f6bff);
+  filter:blur(60px);opacity:.55;animation:spin 18s linear infinite}
+.hero-photo::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 50% 45%,transparent 30%,rgba(7,8,13,.55) 100%),linear-gradient(180deg,transparent 55%,rgba(7,8,13,.7))}
+@keyframes spin{to{transform:rotate(360deg)}}
+.orbit{position:absolute;left:50%;top:46%;border-radius:50%;border:1px solid rgba(255,255,255,.12);transform:translate(-50%,-50%);animation:spin linear infinite;z-index:1}
+.orbit i{position:absolute;top:-5px;left:50%;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 0 14px 3px rgba(255,255,255,.7)}
+.o1{width:210px;height:210px;animation-duration:12s}
+.o2{width:290px;height:290px;animation-duration:20s;animation-direction:reverse}
+.o2 i{background:var(--teal);box-shadow:0 0 14px 3px rgba(63,224,197,.8)}
+.o3{width:380px;height:380px;animation-duration:30s}
+.o3 i{background:var(--amber);box-shadow:0 0 14px 3px rgba(255,180,90,.8)}
+.float-glass{position:absolute;z-index:1;border-radius:22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+.fg1{width:70px;height:70px;left:10%;top:14%;animation:bob 7s ease-in-out infinite}
+.fg2{width:46px;height:46px;right:12%;top:22%;border-radius:50%;animation:bob 9s ease-in-out infinite reverse}
+.fg3{width:90px;height:56px;right:16%;bottom:24%;border-radius:18px;animation:bob 8s ease-in-out 1s infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-16px) rotate(8deg)}}
+.portrait{position:relative;z-index:2;width:150px;height:150px;margin-top:-30px;animation:bob 10s ease-in-out infinite}
+.portrait img{position:relative;width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid rgba(7,8,13,.6);box-shadow:0 20px 50px -10px rgba(0,0,0,.7)}
+.portrait .ring{position:absolute;inset:-6px;border-radius:50%;
+  background:conic-gradient(from 0deg,#5aa2ff,#a07bff,#ff6fa8,#ffb45a,#3fe0c5,#5aa2ff);animation:spin 6s linear infinite}
+.hero-id{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 20px;margin:-56px 16px 16px;border-radius:20px}
 .hero-id strong{display:block;font-size:1rem}
 .hero-id small{color:var(--muted);font-size:.82rem}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px 16px}
@@ -334,12 +353,22 @@ footer{text-align:center;color:var(--faint);font-size:.8rem;padding:30px 20px 40
     </div>
 
     <div class="hero-card glass reveal">
-      <div class="hero-photo">
-        <img class="city" src="assets/doha.webp" alt="Doha skyline at sunset">
+      <div class="hero-photo" aria-hidden="false">
+        <div class="aurora"></div>
+        <div class="orbit o1"><i></i></div>
+        <div class="orbit o2"><i></i></div>
+        <div class="orbit o3"><i></i></div>
+        <div class="float-glass fg1"></div>
+        <div class="float-glass fg2"></div>
+        <div class="float-glass fg3"></div>
+        <div class="portrait">
+          <div class="ring"></div>
+          <img src="assets/avatar.webp" alt="Ali Al Qahtani">
+        </div>
       </div>
       <div class="hero-id glass">
-        <img src="assets/avatar.webp" alt="Ali Al Qahtani">
         <div><strong>Ali Al Qahtani</strong><small>Systems &amp; Applications · MCIT</small></div>
+        <span class="status" style="margin:0;padding:5px 10px 5px 8px"><i></i>Doha</span>
       </div>
       <div class="stats">
         <div class="stat"><b data-count="2">0</b><span>Years at MCIT</span></div>
